@@ -47,7 +47,8 @@ final class AttributeValueProvider implements AttributeValueProviderInterface
             'localeCode' => $locale,
         ]);
 
-        if (null === $attributeValue) {
+        if (null == $attributeValue) {
+            /** @var AttributeValueInterface $attributeValue */
             $attributeValue = $this->attributeValueFactory->createNew();
             $attributeValue->setLocaleCode($locale);
             $attributeValue->setAttribute($attribute);

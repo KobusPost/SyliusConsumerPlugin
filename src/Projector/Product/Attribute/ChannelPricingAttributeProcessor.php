@@ -111,6 +111,7 @@ final class ChannelPricingAttributeProcessor implements AttributeProcessorInterf
                 ]);
 
                 if (null === $channelPricing) {
+                    /** @var ChannelPricingInterface $channelPricing */
                     $channelPricing = $this->channelPricingFactory->createNew();
                     $channelPricing->setChannelCode($channel->getCode());
                     $channelPricing->setProductVariant($productVariant);

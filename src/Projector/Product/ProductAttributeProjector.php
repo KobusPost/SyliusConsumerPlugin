@@ -59,7 +59,7 @@ final class ProductAttributeProjector
         $processedAttributes = [];
 
         $locales = array_map(function (LocaleInterface $locale): string {
-            return $locale->getCode();
+            return $locale->getCode() ?? '';
         }, $this->localeRepository->findAll());
 
         foreach (new Attributes($attributes, $locales) as $attribute) {

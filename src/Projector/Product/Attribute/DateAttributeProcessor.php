@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Sylake\SyliusConsumerPlugin\Projector\Product\Attribute;
 
 use Sylake\SyliusConsumerPlugin\Model\Attribute;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 
 final class DateAttributeProcessor implements AttributeProcessorInterface
 {
@@ -25,16 +25,23 @@ final class DateAttributeProcessor implements AttributeProcessorInterface
             return [];
         }
 
-        /** @var AttributeValueInterface|null $attributeValue */
+        /** @var ProductAttributeValueInterface|null $attributeValue */
         $attributeValue = $this->attributeValueProvider->provide($product, $attribute->attribute(), $attribute->locale());
         if (null === $attributeValue) {
             return [];
         }
 
         // Strip everything except the year, month and day
+        $dateTime = \DateTime::createFromFormat(\DateTime::ATOM, $attribute->data());
+
+        if (!$dateTime instanceof \DateTime) {
+            return [];
+        }
+
+        $format = $dateTime->format('Y-m-d');
         $attributeValue->setValue(\DateTime::createFromFormat(
             '!Y-m-d',
-            \DateTime::createFromFormat(\DateTime::ATOM, $attribute->data())->format('Y-m-d')
+            $format
         ));
 
         return [$attributeValue];

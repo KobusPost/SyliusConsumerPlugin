@@ -49,6 +49,7 @@ final class AssociationTypeProjector
         /** @var ProductAssociationTypeInterface|null $associationType */
         $associationType = $this->repository->findOneBy(['code' => $event->code()]);
         if (null === $associationType) {
+            /** @var  ProductAssociationTypeInterface $associationType */
             $associationType = $this->factory->createNew();
             $associationType->setCode($event->code());
         }

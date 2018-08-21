@@ -77,7 +77,7 @@ final class ProductTaxonProjector
             /** @var TaxonInterface $taxon */
             $taxon = $this->taxonRepository->findOneBy(['code' => $taxonCode]);
 
-            if (null === $taxon) {
+            if (null == $taxon) {
                 continue;
             }
 
@@ -89,6 +89,7 @@ final class ProductTaxonProjector
 
     private function provideProductTaxon(ProductInterface $product, TaxonInterface $taxon): ProductTaxonInterface
     {
+        /** @var ProductTaxonInterface|null $productTaxon */
         $productTaxon = $this->productTaxonRepository->findOneBy(['product' => $product, 'taxon' => $taxon]);
 
         if (null === $productTaxon) {

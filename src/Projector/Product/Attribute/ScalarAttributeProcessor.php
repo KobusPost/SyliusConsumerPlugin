@@ -8,8 +8,8 @@ use Sylake\SyliusConsumerPlugin\Model\Attribute;
 use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextareaAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 
 final class ScalarAttributeProcessor implements AttributeProcessorInterface
 {
@@ -40,9 +40,9 @@ final class ScalarAttributeProcessor implements AttributeProcessorInterface
             return [];
         }
 
-        /** @var AttributeValueInterface|null $attributeValue */
+        /** @var ProductAttributeValueInterface|null $attributeValue */
         $attributeValue = $this->attributeValueProvider->provide($product, $attribute->attribute(), $attribute->locale());
-        if (null === $attributeValue || !in_array($attributeValue->getAttribute()->getType(), self::$supportedAttributeTypes, true)) {
+        if (null === $attributeValue || null === $attributeValue->getAttribute() || !in_array($attributeValue->getAttribute()->getType(), self::$supportedAttributeTypes, true)) {
             return [];
         }
 

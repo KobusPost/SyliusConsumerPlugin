@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Sylake\SyliusConsumerPlugin\Projector\Product\Attribute;
 
 use Sylake\SyliusConsumerPlugin\Model\Attribute;
-use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 
 final class UnitAttributeProcessor implements AttributeProcessorInterface
 {
@@ -31,7 +31,7 @@ final class UnitAttributeProcessor implements AttributeProcessorInterface
             return [];
         }
 
-        /** @var AttributeValueInterface|null $attributeValue */
+        /** @var ProductAttributeValueInterface|null $attributeValue */
         $attributeValue = $this->attributeValueProvider->provide($product, $attribute->attribute(), $attribute->locale());
         if (null === $attributeValue) {
             return [];

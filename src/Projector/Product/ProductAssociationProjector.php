@@ -70,7 +70,7 @@ final class ProductAssociationProjector
             /** @var ProductAssociationTypeInterface $associationType */
             $associationType = $this->associationTypeRepository->findOneBy(['code' => $associationTypeCode]);
 
-            if (null === $associationType) {
+            if (null == $associationType) {
                 continue;
             }
 
@@ -102,7 +102,8 @@ final class ProductAssociationProjector
         /** @var ProductAssociationInterface $association */
         $association = $this->associationRepository->findOneBy(['type' => $associationType, 'owner' => $product]);
 
-        if (null === $association) {
+        if (null == $association) {
+            /** @var ProductAssociationInterface $association */
             $association = $this->associationFactory->createNew();
             $association->setOwner($product);
             $association->setType($associationType);

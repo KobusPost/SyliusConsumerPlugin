@@ -22,7 +22,7 @@ final class AttributeOptionResolver implements AttributeOptionResolverInterface
     {
         /** @var AkeneoAttributeOption $option */
         $option = $this->repository->findOneBy(['attribute' => $attribute, 'code' => $data]);
-        if (null === $option) {
+        if (null == $option) {
             return $data;
         }
 

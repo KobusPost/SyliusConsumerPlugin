@@ -11,10 +11,10 @@ use Sylake\SyliusConsumerPlugin\Projector\Product\ProductAttributeProjector;
 use Sylake\SyliusConsumerPlugin\Projector\Product\ProductPostprocessorInterface;
 use Sylake\SyliusConsumerPlugin\Projector\Product\ProductSlugGeneratorInterface;
 use Sylake\SyliusConsumerPlugin\Projector\Product\ProductTaxonProjector;
+use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 final class ProductProjector
@@ -119,8 +119,8 @@ final class ProductProjector
 
     private function handleSlug(ProductInterface $product): void
     {
+        /** @var ProductTranslationInterface $productTranslation */
         foreach ($product->getTranslations() as $productTranslation) {
-            /** @var ProductTranslationInterface|TranslationInterface $productTranslation */
             $productTranslation->setSlug($this->productSlugGenerator->generate($product, $productTranslation->getLocale()));
         }
     }
@@ -131,6 +131,7 @@ final class ProductProjector
         $product = $this->productRepository->findOneBy(['code' => $code]);
 
         if (null === $product) {
+            /** @var Product $product */
             $product = $this->productFactory->createWithVariant();
             $product->setCode($code);
 

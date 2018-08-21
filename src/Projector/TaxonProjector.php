@@ -61,6 +61,7 @@ final class TaxonProjector
         /** @var TaxonInterface|null $taxon */
         $taxon = $this->repository->findOneBy(['code' => $event->code()]);
         if (null === $taxon) {
+            /** @var TaxonInterface $taxon */
             $taxon = $this->factory->createNew();
             $taxon->setCode($event->code());
         }
