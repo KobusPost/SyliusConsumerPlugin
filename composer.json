@@ -23,7 +23,6 @@
         "php": "^7.1",
 
         "php-amqplib/rabbitmq-bundle": "^1.12",
-        "sylius-labs/rabbitmq-simplebus-bundle": "dev-feature/symfony4-support",
         "sylius/sylius": "^1.2"
     },
     "require-dev": {
